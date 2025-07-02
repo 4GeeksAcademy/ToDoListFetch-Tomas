@@ -15,6 +15,19 @@ const Home = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		const handleGlobalEnter = (e) => {
+			if (e.key === "Enter" && tareas.length === 0) {
+				setTareas([{ id: Date.now(), texto: "" }]);
+			}
+		};
+
+		window.addEventListener("keydown", handleGlobalEnter);
+		return () => {
+			window.removeEventListener("keydown", handleGlobalEnter);
+		};
+	}, [tareas]);
+
 	const manejarCambio = (id, nuevoTexto) => {
 		const nuevasTareas = tareas.map((tarea) =>
 			tarea.id === id ? { ...tarea, texto: nuevoTexto } : tarea
@@ -66,7 +79,7 @@ const Home = () => {
 					onEliminar={eliminarTarea}
 				/>
 			))}
-			<p className="text-center mt-4 fs-4 text-warning-emphasis">{tareas.length} items left</p>
+			<p id="nItems" className="text-center mt-4 fs-4 text-warning-emphasis">{tareas.length === 0 ? "No hay Tareas pendientes, Presiona Enter para Añadir una" : `${tareas.length} Tarea/s Pendientes`}</p>
 			<button onClick={reiniciarTareas} className="mt-4 fs-5 rounded px-3 btn btn-primary mx-auto d-block">Clear</button>
 		</div>
 	);
