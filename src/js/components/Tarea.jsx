@@ -5,7 +5,7 @@ const Tarea = ({ id, texto, onChange, onEnter, onEliminar }) => {
 
     return (
         <div
-            className="border shadow p-3 w-50 bg-white mx-auto d-flex align-items-center position-relative"
+            className="border rounded shadow p-3 w-50 bg-white mx-auto d-flex align-items-center position-relative"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >

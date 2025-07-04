@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Tarea from "./Tarea";
+import Login from "./Login"
 
 const Home = () => {
 	const [tareas, setTareas] = useState([{ id: Date.now(), texto: "" }]);
@@ -14,6 +15,27 @@ const Home = () => {
 			document.body.style.backgroundColor = "";
 		};
 	}, []);
+
+	// useEffect(() => {
+	// 	const fetchTareas = async () => {
+	// 		try {
+	// 			const response = await fetch("https://miapi.com/tareas");
+	// 			if (!response.ok) throw new Error("Error al obtener tareas");
+	// 			const data = await response.json();
+
+	// 			if (Array.isArray(data) && data.length > 0) {
+	// 				setTareas(data);
+	// 			} else {
+	// 				setTareas([{ id: Date.now(), texto: "" }]);
+	// 			}
+	// 		} catch (error) {
+	// 			console.error("Error:", error);
+	// 			setTareas([{ id: Date.now(), texto: "" }]);
+	// 		}
+	// 	};
+
+	// 	fetchTareas();
+	// }, []);
 
 	useEffect(() => {
 		const handleGlobalEnter = (e) => {
@@ -69,6 +91,9 @@ const Home = () => {
 			<h1 className="text-warning fw-bold text-center display-4 text-decoration-underline mb-4">
 				To-Do List
 			</h1>
+			<div className="d-flex justify-content-center mb-5 mt-3">
+				<Login />
+			</div>
 			{tareas.map((tarea) => (
 				<Tarea
 					key={tarea.id}
