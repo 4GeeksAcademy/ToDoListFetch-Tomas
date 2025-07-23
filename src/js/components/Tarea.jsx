@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 
 const Tarea = ({ id, texto, onChange, onEnter, onEliminar }) => {
-    const [hover, setHover] = useState(false); // ← Estado para detectar hover
+    const [hover, setHover] = useState(false);
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
+
+    const mostrarInputRef = () => {
+        console.log(inputRef.current.value);
+    }
 
     return (
         <div
@@ -9,13 +19,14 @@ const Tarea = ({ id, texto, onChange, onEnter, onEliminar }) => {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
+            <button type="button" className="btn btn-primary" onClick={mostrarInputRef}>Mostrar input ref</button>
             <input
+                ref={inputRef}
                 type="text"
                 className="form-control me-2"
-                value={texto}
+                defaultValue={texto}
                 onChange={(e) => onChange(id, e.target.value)}
-                onKeyDown={(e) => onEnter(e, id)}
-                autoFocus
+                onKeyDown={(e) => onEnter(e, id, inputRef.current.value)}
                 placeholder="Write your task"
             />
             <button
