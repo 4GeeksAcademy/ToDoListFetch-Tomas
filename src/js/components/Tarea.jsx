@@ -19,7 +19,7 @@ const Tarea = ({ id, texto, onChange, onEnter, onEliminar }) => {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
-            <button type="button" className="btn btn-primary" onClick={mostrarInputRef}>Mostrar input ref</button>
+            {/* <button type="button" className="btn btn-primary" onClick={mostrarInputRef}>Mostrar input ref</button> */}
             <input
                 ref={inputRef}
                 type="text"
@@ -27,7 +27,7 @@ const Tarea = ({ id, texto, onChange, onEnter, onEliminar }) => {
                 defaultValue={texto}
                 onChange={(e) => onChange(id, e.target.value)}
                 onKeyDown={(e) => onEnter(e, id, inputRef.current.value)}
-                placeholder="Write your task"
+                placeholder="Escribe una tarea"
             />
             <button
                 style={{
